@@ -7,6 +7,16 @@
 #include <GL/glew.h>
 
 Display::Display() {
+
+
+    /*
+     * SDL init sequence
+     *
+     * SDL_init
+     * SDL_CreateWindow
+     * SDL_GL_CreateContext
+     */
+
     cout << "Display Constructor" << std::endl;
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
@@ -24,13 +34,21 @@ Display::Display() {
 
     SDL_GL_CreateContext(window);
 
+    /*
+     * glf init sequence
+     * glCreateProgram should be call after glewInit, https://stackoverflow.com/questions/22171300/glsl-loading-core-dumped
+     *
+     * glfwInit
+     * glfwCreateWindow
+     *
+     */
     GLenum status = glewInit();
 
     if (status != GLEW_OK) {
         cout << "init glew failed." << endl;
     }
 
-    Shader shader;  //glCreateProgram should be call after glewInit
+    Shader shader;  //glCreateProgram should be call after glewInit, https://stackoverflow.com/questions/22171300/glsl-loading-core-dumped
     shader.Bind();
     closed = false;
 }
@@ -56,3 +74,6 @@ void Display::drawColor(float r, float g, float b, float alpha) {
     glClearColor(r, g, b, alpha);
     glClear(GL_COLOR_BUFFER_BIT);
 }
+
+
+
