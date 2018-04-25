@@ -4,7 +4,6 @@
 
 #include "Display.h"
 #include "Shader.h"
-#include <GL/glew.h>
 
 Display::Display() {
 
@@ -48,8 +47,6 @@ Display::Display() {
         cout << "init glew failed." << endl;
     }
 
-    Shader shader;  //glCreateProgram should be call after glewInit, https://stackoverflow.com/questions/22171300/glsl-loading-core-dumped
-    shader.Bind();
     closed = false;
 }
 
