@@ -1,6 +1,7 @@
 #include "Display.h"
 #include "Shader.h"
 #include "Mesh.h"
+#include "Texture.h"
 
 int main() {
     Display display;
@@ -17,7 +18,7 @@ int main() {
     Shader shader;
     shader.Bind();
 
-    //Texture texture("/home/kurt/CLionProjects/opengl2/src/res/texture/bricks.jpg");
+    Texture texture("/home/kurt/CLionProjects/opengl2/src/res/texture/bricks.jpg");
 
     float delta = 0.001;
     float r = 0;
@@ -28,7 +29,7 @@ int main() {
         }
         display.drawColor(1, 0.5, 0.5, .1);
         mesh.Draw();
-        //texture.bind(0);
+        texture.bind(0);
         display.SwapBuffer();
     }
     return 0;

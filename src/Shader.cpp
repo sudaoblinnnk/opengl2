@@ -35,7 +35,7 @@ Shader::Shader()
     //   second parameter VBO index in which data is set by Mesh code glEnableVertexAttribArray
     //   third parameter is name of attribute in Vertex Shader
     glBindAttribLocation(mProgram, 0, "position");
-    //glBindAttribLocation(mProgram, 1, "texCord");
+    glBindAttribLocation(mProgram, 1, "texCord");
 
 }
 

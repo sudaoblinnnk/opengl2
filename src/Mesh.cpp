@@ -53,14 +53,21 @@ Mesh::Mesh(Vertex *vertices, unsigned int numVertex) {
      *
      */
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+    glBindBuffer(GL_ARRAY_BUFFER, mVertexArrayBuffers[TEXTURE_VB]);
+    glBufferData(GL_ARRAY_BUFFER, mDrawCount * sizeof(texVector[0]), &texVector[0], GL_STATIC_DRAW);
 
-
-//    glBindBuffer(GL_ARRAY_BUFFER, mVertexArrayBuffers[TEXTURE_VB]);
-//    glBufferData(GL_ARRAY_BUFFER, mDrawCount * sizeof(texVector[0]), &texVector[0], GL_STATIC_DRAW);
-//    glEnableVertexAttribArray(1);
-//    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-//    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    /*
+     * glEnableVertexAttribArray parameter and
+     * glVertexAttribPointer 1 parameter shoulb points
+     * to current VBO index.
+     * glEnableVertexAttribArray    http://docs.gl/gl4/glEnableVertexAttribArray
+     * glVertexAttribPointer        http://docs.gl/gl4/glVertexAttribPointer
+     * Tutorial                     https://www.youtube.com/watch?v=4_euGM0MmgM
+     */
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
     // ---------unbind VAO and VBO ------------------------------------------------
     // unbind mVertexArrayBuffers[POSITION_VB], bind buffer call is simply cleanup.
