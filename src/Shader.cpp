@@ -11,8 +11,8 @@
 Shader::Shader()
 {
     mProgram = glCreateProgram();
-    std::string vertexShader = loadShader("/home/kurt/CLionProjects/opengl2/src/res/BasicShader.vs");
-    std::string fragShader = loadShader("/home/kurt/CLionProjects/opengl2/src/res/BasicShader.fs");
+    std::string vertexShader = loadShader("/home/kurt/CLionProjects/opengl2/src/res/BasicVertexShader.glsl");
+    std::string fragShader = loadShader("/home/kurt/CLionProjects/opengl2/src/res/BasicFragmentShader.glsl");
     shaders[0] = createShader(vertexShader, GL_VERTEX_SHADER);
     shaders[1] = createShader(fragShader, GL_FRAGMENT_SHADER);
 
@@ -29,6 +29,14 @@ Shader::Shader()
     if (CheckShaderError(mProgram, GL_LINK_STATUS, true, "glValidateProgram error") == GL_FALSE) {
         return;
     }
+
+    //this function will map shader attribute to VBO index,
+    //   first parameter is Shader program
+    //   second parameter VBO index in which data is set by Mesh code glEnableVertexAttribArray
+    //   third parameter is name of attribute in Vertex Shader
+    glBindAttribLocation(mProgram, 0, "position");
+    //glBindAttribLocation(mProgram, 1, "texCord");
+
 }
 
 Shader::~Shader()

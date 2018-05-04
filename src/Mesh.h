@@ -10,10 +10,19 @@
 
 class Vertex {
 public:
-    explicit Vertex(const glm::vec3 &pos);
+    explicit Vertex(const glm::vec3 &pos, const glm::vec2 &tex);
+
+    const glm::vec3 getPos() const {
+        return pos;
+    }
+
+    const glm::vec2 getTex() const {
+        return tex;
+    }
 
 private:
     glm::vec3 pos;
+    glm::vec2 tex;
 };
 
 class Mesh {
@@ -36,6 +45,7 @@ private:
 private:
     enum {
         POSITION_VB,
+        TEXTURE_VB,
         NUM_BUFFERS
     };
 
