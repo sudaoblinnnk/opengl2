@@ -19,7 +19,13 @@ int main() {
     shader.Bind();
 
     Texture texture("/home/kurt/CLionProjects/opengl2/src/res/texture/bricks.jpg");
+    glm::vec3 pos;
+    glm::vec3 scale(1, 1, 1);
+    glm::vec3 rotate(0, 0, 0);
 
+    Transform t1(pos, scale, rotate);
+
+    float step = 0.01;
     float delta = 0.001;
     float r = 0;
     while (!display.isClosed()) {
@@ -30,7 +36,15 @@ int main() {
         display.drawColor(1, 0.5, 0.5, .1);
         mesh.Draw();
         texture.bind(0);
+
+        t1.getTranform().x = sin(step);
+        t1.getTranform().y = cos(step);
+        t1.setRotate(glm::vec3(0, 0, step));
+        shader.update(t1);
+        step += 0.01;
+
         display.SwapBuffer();
+
     }
     return 0;
 }

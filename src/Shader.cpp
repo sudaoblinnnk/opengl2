@@ -37,6 +37,7 @@ Shader::Shader()
     glBindAttribLocation(mProgram, 0, "position");
     glBindAttribLocation(mProgram, 1, "texCord");
 
+    uniform[TRANSFORM_UNIFORM] = glGetUniformLocation(mProgram, "transform");
 }
 
 Shader::~Shader()
@@ -108,4 +109,10 @@ std::string Shader::loadShader(const std::string &fileName)
 void Shader::Bind()
 {
     glUseProgram(mProgram);
+}
+
+void Shader::update(Transform &transform) {
+    glm::mat4 model = transform.getModel();
+
+    glUniformMatrix4fv(uniform[TRANSFORM_UNIFORM], 1, GL_FALSE, &model[0][0]);
 }
